@@ -17,13 +17,13 @@ import (
 
 // Structure for data passed to print response.
 type response struct {
-	Data   []byte
-	Code   types.CodeType
-	Key    []byte
-	Value  []byte
-	Log    string
-	Height string
-	Proof  []byte
+	Data       []byte
+	Code       types.CodeType
+	Key        []byte
+	Value      []byte
+	Log        string
+	LastHeight string
+	Proof      []byte
 }
 
 // client is a global variable so it can be reused by the console
@@ -308,11 +308,11 @@ func cmdQuery(c *cli.Context) error {
 		return err
 	}
 	printResponse(c, response{
-		Code:   resQuery.Code,
-		Key:    resQuery.Key,
-		Value:  resQuery.Value,
-		Log:    resQuery.Log,
-		Height: fmt.Sprintf("%v", resQuery.Height),
+		Code:       resQuery.Code,
+		Key:        resQuery.Key,
+		Value:      resQuery.Value,
+		Log:        resQuery.Log,
+		LastHeight: fmt.Sprintf("%v", resQuery.LastHeight),
 		//Proof:  resQuery.Proof,
 	})
 	return nil
@@ -346,8 +346,8 @@ func printResponse(c *cli.Context, rsp response) {
 	if rsp.Log != "" {
 		fmt.Printf("-> log: %s\n", rsp.Log)
 	}
-	if rsp.Height != "" {
-		fmt.Printf("-> height: %s\n", rsp.Height)
+	if rsp.LastHeight != "" {
+		fmt.Printf("-> height: %s\n", rsp.LastHeight)
 	}
 	if rsp.Proof != nil {
 		fmt.Printf("-> proof: %X\n", rsp.Proof)

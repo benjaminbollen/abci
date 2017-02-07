@@ -76,7 +76,7 @@ ABCI requests/responses are simple Protobuf messages.  Check out the [schema fil
     * `Path (string)`: Path of request, like an HTTP GET path.  Can be used with or in liue of Data.
       * Apps MUST interpret '/store' as a query by key on the underlying store.  The key SHOULD be specified in the Data field.
       * Apps SHOULD allow queries over specific types like '/accounts/...' or '/votes/...'
-    * `Height (uint64)`: The block height for which you want the query (default=0 returns data for the latest committed block)
+    * `LastHeight (uint64)`: The block height for which you want the query (default=0 returns data for the latest committed block). Note that the corresponding Merkle root hash will only be included in the header of the next block (ie. `LastHeight + 1`)
     * `Prove (bool)`: Return Merkle proof with response if possible
   * __Returns__:
     * `Code (uint32)`: Response code
